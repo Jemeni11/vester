@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import React, { useState } from "react";
 import {
   Listbox,
@@ -24,6 +26,8 @@ export default function Registration() {
   const [startUpWebsite, setStartUpWebsite] = useState("");
   const [dateFounded, setDateFounded] = useState("");
 
+  const navigate = useNavigate();
+  
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = {
@@ -44,9 +48,7 @@ export default function Registration() {
       alert("Please select an industry.");
       return;
     }
-
-    console.log(formData);
-    // You can add your logic to handle the form data here
+    navigate('/dashboard')
   };
 
   return (
