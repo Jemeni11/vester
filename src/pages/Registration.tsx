@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-
+import { useFormContext } from "../store/FormContext"
 import React, { useState } from "react";
 import {
   Listbox,
@@ -27,6 +27,7 @@ export default function Registration() {
   const [dateFounded, setDateFounded] = useState("");
 
   const navigate = useNavigate();
+  const { setFormData } = useFormContext();
   
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -38,7 +39,8 @@ export default function Registration() {
       selectedCompanyTech,
       dateFounded,
     };
-
+    
+    
     if (!selectedCountry) {
       alert("Please select a country.");
       return;
@@ -48,7 +50,9 @@ export default function Registration() {
       alert("Please select an industry.");
       return;
     }
-    navigate('/dashboard')
+
+    setFormData(formData);
+    navigate('/dashboard');
   };
 
   return (
