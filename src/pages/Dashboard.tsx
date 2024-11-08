@@ -15,6 +15,7 @@ export default function Dashboard() {
             </div>
             <div>
               <strong className="text-gray-600">Startup Website:</strong>
+              <br/>
               <a href={formData.startUpWebsite} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
                 {formData.startUpWebsite}
               </a>
