@@ -5,7 +5,7 @@ interface FormData {
   startUpWebsite: string;
   selectedCountry: string;
   selectedIndustry: string;
-  selectedCompanyTech: string;
+  selectedCompanyTech: string[];
   dateFounded: string;
 }
 
