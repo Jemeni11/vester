@@ -98,7 +98,7 @@ export default function Dashboard() {
           </div>
 
           <div className="rounded-lg bg-white p-6 shadow-md">
-            <div className="mb-4 flex items-center justify-between">
+            <div className="mb-4 flex flex-col justify-between gap-y-4 sm:flex-row sm:items-center">
               <h2 className="text-2xl font-bold">Similar Companies</h2>
               <div className="relative">
                 <input
