@@ -22,6 +22,8 @@ import {
   DialogTrigger,
 } from "./ui/dialog";
 
+import { FormButton, FormInput, FormSelect, MultiSelect } from "./Form";
+
 export {
   Command,
   CommandEmpty,
@@ -42,4 +44,8 @@ export {
   DialogPortal,
   DialogTitle,
   DialogTrigger,
+  FormButton,
+  FormInput,
+  FormSelect,
+  MultiSelect,
 };
