@@ -72,7 +72,7 @@ export default function Registration() {
 
         <main className="flex w-full items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12">
           <div className="w-full max-w-xl lg:max-w-3xl">
-            <div className="relative -mt-16 block lg:hidden">
+            <div className="relative -mt-12 block lg:hidden">
               <h1 className="mt-4 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
                 Welcome to Vester.AI
               </h1>
