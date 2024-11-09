@@ -27,7 +27,9 @@ export default function Registration() {
     dateFounded: "",
   });
 
-  const [multiSelectError, setMultiSelectError] = useState<string>("");
+  const [multiSelectError, setMultiSelectError] = useState<string | undefined>(
+    undefined,
+  );
   const navigate = useNavigate();
   const { setFormData: setContextFormData } = useFormContext();
 
@@ -128,12 +130,12 @@ export default function Registration() {
                   }))
                 }
                 options={CompanyTechnologies}
-                required
+                id="selectedCompanyTech"
                 name="selectedCompanyTech"
                 error={multiSelectError}
                 onValidationChange={(isValid) => {
                   if (isValid && multiSelectError) {
-                    setMultiSelectError("");
+                    setMultiSelectError(undefined);
                   }
                 }}
               />
@@ -147,7 +149,9 @@ export default function Registration() {
                 onChange={handleChange}
               />
 
-              <FormButton type="submit">Register</FormButton>
+              <FormButton type="submit" className="max-h-12">
+                Register
+              </FormButton>
             </form>
           </div>
         </main>
