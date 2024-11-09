@@ -1,5 +1,5 @@
-import { useNavigate } from 'react-router-dom';
-import { useFormContext } from "../store/FormContext"
+import { useNavigate } from "react-router-dom";
+import { useFormContext } from "../store/FormContext";
 import React, { useState } from "react";
 import {
   Listbox,
@@ -7,6 +7,8 @@ import {
   ListboxOption,
   ListboxButton,
   Transition,
+  Field,
+  Label,
 } from "@headlessui/react";
 import { CheckIcon, ChevronsUpDown } from "lucide-react";
 
@@ -28,7 +30,7 @@ export default function Registration() {
 
   const navigate = useNavigate();
   const { setFormData } = useFormContext();
-  
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = {
@@ -39,8 +41,7 @@ export default function Registration() {
       selectedCompanyTech,
       dateFounded,
     };
-    
-    
+
     if (!selectedCountry) {
       alert("Please select a country.");
       return;
@@ -52,12 +53,12 @@ export default function Registration() {
     }
 
     setFormData(formData);
-    navigate('/dashboard');
+    navigate("/dashboard");
   };
 
   return (
     <section className="bg-white">
-      <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
+      <div className="w-full lg:grid lg:min-h-screen lg:grid-cols-12">
         <section className="xl: relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full">
           <div className="absolute inset-0 h-full w-full bg-[#f47207] opacity-80" />
 
@@ -72,8 +73,8 @@ export default function Registration() {
           </div>
         </section>
 
-        <main className="xl: flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12">
-          <div className="max-w-xl lg:max-w-3xl">
+        <main className="flex w-full items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12">
+          <div className="w-full max-w-xl lg:max-w-3xl">
             <div className="relative -mt-16 block lg:hidden">
               <h1 className="mt-4 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
                 Welcome to Vester.AI
@@ -102,7 +103,7 @@ export default function Registration() {
                   name="start_up_name"
                   value={startUpName}
                   onChange={(e) => setStartUpName(e.target.value)}
-                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  className="mt-2 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   required
                 />
               </div>
@@ -121,7 +122,7 @@ export default function Registration() {
                   name="start_up_website"
                   value={startUpWebsite}
                   onChange={(e) => setStartUpWebsite(e.target.value)}
-                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  className="mt-2 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   required
                 />
               </div>
@@ -139,7 +140,7 @@ export default function Registration() {
                   name="location"
                   value={selectedCountry}
                   onChange={(e) => setSelectedCountry(e.target.value)}
-                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  className="mt-2 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   required
                 >
                   <option value="">--Please choose an option--</option>
@@ -164,7 +165,7 @@ export default function Registration() {
                   name="industry"
                   value={selectedIndustry}
                   onChange={(e) => setSelectedIndustry(e.target.value)}
-                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  className="mt-2 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   required
                 >
                   <option value="">--Please choose an option--</option>
@@ -176,20 +177,21 @@ export default function Registration() {
                 </select>
               </div>
 
-              <div>
-                <label
+              <Field>
+                <Label
                   htmlFor="CompanyTechnologies"
                   className="block text-sm font-medium text-gray-700"
                 >
                   What technology does your company mainly use?
-                </label>
+                </Label>
 
                 <Listbox
+                  name="CompanyTechnologies"
                   value={selectedCompanyTech}
                   onChange={setSelectedCompanyTech}
                   multiple
                 >
-                  <div className="relative mt-1 w-full max-w-[100%] rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm sm:max-w-md">
+                  <div className="relative mt-2 w-full max-w-[100%] rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm sm:!max-w-[100%]">
                     <ListboxButton className="relative w-full cursor-default rounded-md bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
                       <span className="block truncate">
                         {selectedCompanyTech.length === 0
@@ -211,7 +213,7 @@ export default function Registration() {
                       leaveFrom="transform scale-100 opacity-100"
                       leaveTo="transform scale-95 opacity-0"
                     >
-                      <ListboxOptions className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                      <ListboxOptions className="absolute z-10 mt-1 max-h-60 w-[var(--button-width)] overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                         {CompanyTechnologies.map((technology) => (
                           <ListboxOption
                             key={technology}
@@ -249,7 +251,7 @@ export default function Registration() {
                     </Transition>
                   </div>
                 </Listbox>
-              </div>
+              </Field>
 
               <div>
                 <label
@@ -265,7 +267,7 @@ export default function Registration() {
                   name="date_founded"
                   value={dateFounded}
                   onChange={(e) => setDateFounded(e.target.value)}
-                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  className="mt-2 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   required
                 />
               </div>
