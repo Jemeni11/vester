@@ -1,4 +1,4 @@
-import { useId, useEffect } from "react";
+import { useEffect } from "react";
 import {
   Listbox,
   ListboxOptions,
@@ -12,13 +12,11 @@ import { CheckIcon, ChevronsUpDown } from "lucide-react";
 
 interface FormInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  error?: string;
 }
 
 export function FormInput({
   label,
   id,
-  error,
   className = "",
   required = true,
   ...props
@@ -31,14 +29,9 @@ export function FormInput({
       <input
         id={id}
         required={required}
-        className={`mt-2 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm invalid:border-red-500 ${className}`}
+        className={`mt-2 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm valid:border-green-500 invalid:border-red-500 ${className}`}
         {...props}
       />
-      {
-        <p className="mt-1 text-sm text-red-500 valid:hidden invalid:block">
-          {error}
-        </p>
-      }
     </div>
   );
 }
@@ -47,14 +40,12 @@ interface FormSelectProps
   extends React.SelectHTMLAttributes<HTMLSelectElement> {
   label: string;
   options: string[];
-  error?: string;
 }
 
 export function FormSelect({
   label,
   id,
   options,
-  error,
   required = true,
   className = "",
   ...props
@@ -67,9 +58,7 @@ export function FormSelect({
       <select
         id={id}
         required={required}
-        className={`mt-2 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm ${
-          error ? "border-red-500" : ""
-        } ${className}`}
+        className={`mt-2 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm valid:border-green-500 invalid:border-red-500 ${className}`}
         {...props}
       >
         <option value="">--Please choose an option--</option>
@@ -79,7 +68,6 @@ export function FormSelect({
           </option>
         ))}
       </select>
-      {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
     </div>
   );
 }
@@ -98,14 +86,13 @@ export function MultiSelect({
   label,
   options,
   error,
-  required = false,
+  required = true,
   value,
+  id,
   name,
   onValidationChange,
   ...props
 }: MultiSelectProps) {
-  const id = useId();
-
   useEffect(() => {
     if (required && onValidationChange) {
       const isValid = Array.isArray(value) && value.length > 0;
@@ -121,9 +108,7 @@ export function MultiSelect({
           <ListboxButton
             id={id}
             name={name}
-            className={`relative w-full cursor-default rounded-md bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm ${
-              error ? "border-red-500" : ""
-            } ${required && Array.isArray(value) && value.length === 0 ? "border-red-500" : ""}`}
+            className={`relative w-full cursor-default rounded-md bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm ${required && Array.isArray(value) && value.length === 0 ? "border-red-500" : "border-green-500"} `}
             aria-required={required}
             aria-invalid={error ? "true" : "false"}
           >
@@ -180,10 +165,6 @@ export function MultiSelect({
           </Transition>
         </div>
       </Listbox>
-      {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
-      {/* {required && Array.isArray(value) && value.length === 0 && !error && (
-        <p className="mt-1 text-sm text-red-500">This field is required</p>
-      )} */}
     </Field>
   );
 }
